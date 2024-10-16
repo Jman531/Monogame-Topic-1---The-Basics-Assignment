@@ -44,8 +44,14 @@ namespace Monogame_Topic_1___The_Basics_Assignment
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            int randomBackround = generator.Next(0, 3);
 
-            backgroundTexture = Content.Load<Texture2D>("Field Background");
+            if (randomBackround == 0)
+                backgroundTexture = Content.Load<Texture2D>("Field Background");
+            else if (randomBackround == 1)
+                backgroundTexture = Content.Load<Texture2D>("forest background 1");
+            else if (randomBackround == 2)
+                backgroundTexture = Content.Load<Texture2D>("forest background 2");
             birdTexture = Content.Load<Texture2D>("bird");
             deerTexture = Content.Load<Texture2D>("deer");
             mooseTexture = Content.Load<Texture2D>("moose");
