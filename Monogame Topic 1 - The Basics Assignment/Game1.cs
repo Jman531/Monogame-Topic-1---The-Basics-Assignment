@@ -2,16 +2,21 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Monogame_Topic_1___The_Basics_Assignment
 {
     public class Game1 : Game
     {
+        public Vector2 birdLocation;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        Texture2D fieldTexture, birdTexture, deerTextrure;
+        Texture2D backgroundTexture, birdTexture, deerTexture, mooseTexture, bearTexture;
+
+        Random generator = new Random();
 
         public Game1()
         {
@@ -23,11 +28,13 @@ namespace Monogame_Topic_1___The_Basics_Assignment
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            birdLocation = new Vector2(generator.Next(0, 701), generator.Next(0, 401));
+
             _graphics.PreferredBackBufferWidth = 800;
             _graphics.PreferredBackBufferHeight = 500;
             _graphics.ApplyChanges();
 
-            this.Window.Title = "Animals";
+            this.Window.Title = "Wild Animals";
 
             base.Initialize();
         }
@@ -38,8 +45,11 @@ namespace Monogame_Topic_1___The_Basics_Assignment
 
             // TODO: use this.Content to load your game content here
 
-            fieldTexture = Content.Load<Texture2D>("Field Background");
+            backgroundTexture = Content.Load<Texture2D>("Field Background");
             birdTexture = Content.Load<Texture2D>("bird");
+            deerTexture = Content.Load<Texture2D>("deer");
+            mooseTexture = Content.Load<Texture2D>("moose");
+            bearTexture = Content.Load<Texture2D>("bear");
         }
 
         protected override void Update(GameTime gameTime)
@@ -60,8 +70,11 @@ namespace Monogame_Topic_1___The_Basics_Assignment
 
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(fieldTexture, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(birdTexture, new Vector2(10, 10), Color.White);
+            _spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
+            _spriteBatch.Draw(deerTexture, new Vector2(150, 350), Color.White);
+            _spriteBatch.Draw(mooseTexture, new Vector2(450, 370), Color.White);
+            _spriteBatch.Draw(bearTexture, new Vector2(0, 350), Color.White);
+            _spriteBatch.Draw(birdTexture, birdLocation, Color.White);
 
             _spriteBatch.End();
 
